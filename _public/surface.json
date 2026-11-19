@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "slug": "hotelpraeferenz-abgeben",
+      "component": "HotelpraeferenzAbgeben",
+      "title": "Hotelpräferenz abgeben",
+      "endpoints": [
+        {
+          "entity": "hotels",
+          "op": "list",
+          "fields": [
+            "hotel_name",
+            "strasse",
+            "hausnummer",
+            "postleitzahl",
+            "ort"
+          ],
+          "max_records": 500
+        },
+        {
+          "entity": "hotelpraeferenzen",
+          "op": "create",
+          "fields": [
+            "vorname",
+            "nachname",
+            "hotels_gemocht",
+            "hotels_nicht_gemocht"
+          ]
+        }
+      ]
+    }
+  ]
+}
