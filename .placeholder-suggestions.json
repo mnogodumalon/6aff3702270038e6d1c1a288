@@ -1,0 +1,15 @@
+{
+  "HotelsDialog.tsx": {
+    "hotel_name": "z. B. Hotel Sonnenhof",
+    "strasse": "z. B. Hauptstraße",
+    "hausnummer": "z. B. 12a",
+    "postleitzahl": "z. B. 80331",
+    "ort": "z. B. München"
+  },
+  "HotelpraeferenzenDialog.tsx": {
+    "vorname": "z. B. Anna",
+    "nachname": "z. B. Müller",
+    "hotels_gemocht": "Welche Hotels gefallen dir?",
+    "hotels_nicht_gemocht": "Welche Hotels eher nicht?"
+  }
+}

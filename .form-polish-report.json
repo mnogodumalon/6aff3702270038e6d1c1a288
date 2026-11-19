@@ -1,0 +1,16 @@
+{
+  "entities": {
+    "Hotels": {
+      "placeholders_set": 5,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Reine Stammdaten mit Adressfeldern ohne numerische Berechnung, daher keine Formeln und keine Standardwerte."
+    },
+    "Hotelpräferenzen": {
+      "placeholders_set": 4,
+      "defaults_keys": [],
+      "computed_keys": [],
+      "reason": "Reine Stammdaten mit Namen und Hotelauswahl, daher keine numerische Berechnung und keine sinnvollen Standardwerte."
+    }
+  }
+}

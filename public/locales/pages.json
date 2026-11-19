@@ -1,0 +1,31 @@
+{
+  "pages": {
+    "en": {
+      "Abgegebene Präferenzen": "Submitted preferences",
+      "Alle Hotels haben Stimmen": "All hotels have votes",
+      "Beliebteste Hotels": "Most popular hotels",
+      "Erstes Hotel anlegen": "Create first hotel",
+      "Hotel anlegen": "Create hotel",
+      "Hotels im System": "Hotels in system",
+      "Jedes Hotel wurde schon bewertet.": "Every hotel has already been rated.",
+      "Lege zuerst Hotels an — nur dann können Leute ihre Präferenzen dazu abgeben.": "Create hotels first — only then can people submit their preferences for them.",
+      "Neueste Hotelpräferenzen": "Latest hotel preferences",
+      "Neueste von {0}": "Latest from {0}",
+      "Noch keine Abgaben": "No submissions yet",
+      "Noch keine Präferenz abgegeben — sobald jemand mitmacht, siehst du es hier.": "No preferences submitted yet — as soon as someone joins in, you'll see it here.",
+      "Noch keine Präferenzen abgegeben.": "No preferences submitted yet.",
+      "Noch ohne Stimme": "No votes yet",
+      "Ohne Namen": "Unnamed",
+      "Präferenz erfassen": "Record preference",
+      "Sobald Präferenzen eingehen, erscheint hier die Rangliste.": "Once preferences come in, the ranking will appear here.",
+      "Zuletzt hat {0} abgestimmt — am beliebtesten ist {1}.": "{0} voted most recently — most popular is {1}.",
+      "Zuletzt hat {0} abgestimmt.": "{0} voted most recently.",
+      "{0} mag ich": "{0} liked",
+      "{0} mag ich nicht": "{0} disliked",
+      "{0} mögen": "{0} like",
+      "{0} mögen nicht": "{0} dislike",
+      "{0} noch ohne Stimme": "{0} without votes yet"
+    }
+  },
+  "v": 1
+}

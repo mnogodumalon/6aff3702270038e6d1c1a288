@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "language": "de",
+  "understanding": {
+    "summary": "Es entsteht eine einfache App, in der Leute ihre Hotelpräferenzen abgeben. Ein Hotel hat nur einen Namen und eine Adresse (Straße, Hausnummer, Postleitzahl, Ort). Eine Präferenz besteht aus Vorname, Nachname, einer Liste von Hotels, die die Person mag, und einer Liste von Hotels, die sie nicht mag. Die Leute geben ihre Präferenzen über eine öffentliche Seite ohne Login ab.",
+    "outside_users": [
+      {
+        "who": "Teilnehmer",
+        "does": "tragen ihren Namen ein und wählen Hotels, die sie mögen und die sie nicht mögen"
+      }
+    ],
+    "roles": [
+      "Verwalter der Hotels",
+      "Teilnehmer, die Präferenzen abgeben"
+    ],
+    "main_tasks": [
+      "Hotels pflegen",
+      "Hotelpräferenz abgeben",
+      "Präferenzen auswerten"
+    ],
+    "platform_roles": [
+      {
+        "persona": "Verwalter der Hotels",
+        "role": "administrator",
+        "apps": [
+          "hotels",
+          "hotelpraeferenzen"
+        ]
+      }
+    ],
+    "wish_kind": "plain",
+    "wish_signals": []
+  },
+  "flows": [
+    {
+      "slug": "hotelpraeferenz-abgeben",
+      "label": {
+        "de": "Hotelpräferenz abgeben",
+        "en": "Submit hotel preference"
+      },
+      "description": "Eine Person trägt ihren Namen ein und wählt aus der Hotelliste die Hotels, die sie mag, und die Hotels, die sie nicht mag.",
+      "priority": "must",
+      "writes": [
+        {
+          "entity": "hotelpraeferenzen",
+          "op": "create",
+          "when": "always",
+          "fields": {
+            "vorname": "user",
+            "nachname": "user",
+            "hotels_gemocht": "picked",
+            "hotels_nicht_gemocht": "picked"
+          },
+          "multiple": false,
+          "needs": {}
+        }
+      ],
+      "required": [],
+      "brief": "# Flow `hotelpraeferenz-abgeben` — Hotelpräferenz abgeben\nEine Person trägt ihren Namen ein und wählt aus der Hotelliste die Hotels, die sie mag, und die Hotels, die sie nicht mag.\n\n## Your hook — import it, never rebuild what it owns\n`import { useHotelpraeferenzAbgebenFlow } from '@/lib/journey/flows/HotelpraeferenzAbgeben';` — generated from the Schreibliste below. It OWNS the form(s), one record search per picked field (columns and filter from the plan) and the submit plan with every fixed and derived value. You compose: `flow.forms.<entity>` for <Bound>/<Field>, `{...flow.picks.<field>.select} {...flow.pick('<field>')}` (or `flow.pickMany` for a multi pick) for <EntitySelectStep>, `flow.validateStep(n)` in StepNav.onNext, `flow.submit` + `flow.formList` for SummaryStep/SuccessStep, `flow.reset()`; what the hook does not own reads through its door `flow.port` — availability `useOccupancy(flow.port, '<entity>', { resource })`, a count `useRecordCount(flow.port, …)` — never import servicePort next to the hook. Options: `steps` (field → step), `items` (how a hit reads, per pick: hotels_gemocht, hotels_nicht_gemocht), `initial`, `messages`. The hook's docblock in .lane-context.md shows the exact call. Never import servicePort, useStepForm, useJourneySubmit, useRecordSearch or useDashboardData in this page — check-intents refuses a page that uses the hook and any of them.\n\n## Steps (in this order)\n1. Vor- und Nachname eintragen\n2. Hotels auswählen, die die Person mag\n3. Hotels auswählen, die die Person nicht mag\n4. Präferenz speichern\n\n## Schreibliste — the ONLY writes this flow makes (the gate compares your plan steps with this list)\n- creates `hotelpraeferenzen`:\n    - `vorname`: the user enters it (bind it through the layer: form.field/…)\n    - `nachname`: the user enters it (bind it through the layer: form.field/…)\n    - `hotels_gemocht`: from the record the user picks in this flow\n    - `hotels_nicht_gemocht`: from the record the user picks in this flow\n\n## Reads\n- `hotels` columns hotel_name, strasse, hausnummer, postleitzahl, ort\n\n## Success page\n- shows: `hotelpraeferenzen.vorname`, `hotelpraeferenzen.nachname`, `hotelpraeferenzen.hotels_gemocht`, `hotelpraeferenzen.hotels_nicht_gemocht`\n"
+    }
+  ],
+  "public_pages": [
+    {
+      "slug": "hotelpraeferenz-abgeben",
+      "purpose": "Teilnehmer tragen Vor- und Nachname ein und wählen aus der Hotelliste die Hotels, die sie mögen, und die Hotels, die sie nicht mögen.",
+      "publish": true,
+      "lists": [
+        {
+          "entity": "hotels",
+          "columns": [
+            "hotel_name",
+            "strasse",
+            "hausnummer",
+            "postleitzahl",
+            "ort"
+          ],
+          "filter": null,
+          "max_records": null
+        }
+      ],
+      "creates": [
+        {
+          "entity": "hotelpraeferenzen",
+          "fields": {
+            "vorname": "user",
+            "nachname": "user",
+            "hotels_gemocht": "picked",
+            "hotels_nicht_gemocht": "picked"
+          },
+          "fixed": {}
+        }
+      ],
+      "brief": "# Public page `hotelpraeferenz-abgeben`\nTeilnehmer tragen Vor- und Nachname ein und wählen aus der Hotelliste die Hotels, die sie mögen, und die Hotels, die sie nicht mögen.\n\n## Lists (declare exactly these in the surface)\n- `hotels`: columns `hotel_name`, `strasse`, `hausnummer`, `postleitzahl`, `ort`\n\n## Creates (declare exactly these in the surface)\n- `hotelpraeferenzen`: visitor fields `vorname`, `nachname`, `hotels_gemocht`, `hotels_nicht_gemocht`\n\n## Availability — mechanical, write nothing for it\nA picker (`useRecordSearch`) never offers a record another record already takes (a booked slot) — the layer leaves it out. To SHOW booked periods, call `useOccupancy(port, '<entity>')` and hand `blocked` to AvailabilityRangePicker; the integration gives the page exactly that read (dates or the reference, never who booked). Never declare a list of bookings with names or contacts to work availability out yourself.\n\nPublish: yes\n"
+    }
+  ],
+  "tools": [],
+  "covered_by_platform": [
+    {
+      "wish": "Hotels und Präferenzen anlegen und bearbeiten",
+      "feature": "record_form"
+    },
+    {
+      "wish": "Übersicht der Präferenzen und Hotels",
+      "feature": "list_page"
+    },
+    {
+      "wish": "Auswertung, welche Hotels wie oft gemocht werden",
+      "feature": "distribution_view"
+    }
+  ],
+  "ownership": {
+    "hotelpraeferenzen": {
+      "vorname": "intent:hotelpraeferenz-abgeben",
+      "nachname": "intent:hotelpraeferenz-abgeben",
+      "hotels_gemocht": "intent:hotelpraeferenz-abgeben",
+      "hotels_nicht_gemocht": "intent:hotelpraeferenz-abgeben"
+    }
+  },
+  "dashboard": {
+    "focus": [
+      "Neueste Hotelpräferenzen",
+      "Anzahl Hotels und Präferenzen"
+    ],
+    "hints": [
+      "Hotels zuerst anlegen, damit sie auswählbar sind"
+    ],
+    "writes": [],
+    "wishes": []
+  }
+}
